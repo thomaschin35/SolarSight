@@ -24,6 +24,7 @@ function HomePage() {
     }
     return (
         <div>
+            
             <Typography variant="h1" align="center" padding={1}>
                 Solar Sight
             </Typography>
