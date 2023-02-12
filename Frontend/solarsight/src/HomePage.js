@@ -12,8 +12,8 @@ function HomePage() {
 
     const [longtitude, setLong] = useState(82);
     const [latitude, setLat] = useState(32);
-    const [tempLong, tempSetLong] = useState(50);
-    const [tempLat, tempSetLat] = useState(32);
+    const [tempLong, tempSetLong] = useState(-84);
+    const [tempLat, tempSetLat] = useState(33);
     
 
     const handleLong = (e) => {

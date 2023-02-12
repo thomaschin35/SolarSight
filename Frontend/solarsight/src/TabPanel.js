@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/material';
 import USMap from "./USMap";
 import HomePage from './HomePage';
+import SolarPanelInfo from './SolarPanelInfo';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,13 +54,15 @@ export default function BasicTabs() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider', }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Dynamic Map" {...a11yProps(0)} />
-                    <Tab label="Static Map of the US" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                    <Tab label="Solar Power in the US" {...a11yProps(1)} />
+                    <Tab label="Solar Panels" {...a11yProps(2)} />
                 </Tabs>
             </Box>
 
             <TabPanel value={value} index={0}>
+
                 <HomePage></HomePage>
+            
             </TabPanel>
             <TabPanel value={value} index={1}>
 
@@ -68,7 +71,7 @@ export default function BasicTabs() {
             </TabPanel>
             <TabPanel value={value} index={2}>
 
-                Item Three
+                <SolarPanelInfo></SolarPanelInfo>
 
             </TabPanel>
 
