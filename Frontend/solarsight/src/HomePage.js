@@ -5,7 +5,6 @@ import { Box, Typography, TextField, Alert } from '@mui/material';
 import { Card } from '@mui/material';
 import Map from './Components/Map';
 import solarImage from './solarImage.jpg'
-import ReactVirtualizedTable from './Components/ReactVirtualizedTable';
 
 
 
