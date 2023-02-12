@@ -3,6 +3,7 @@ import pandas as pd
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+#https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh
 
 def main():
     # Load the dataset
@@ -35,9 +36,9 @@ def main():
     model.fit(X_train, y_train, epochs=500, batch_size=16, validation_split=0.25, verbose=2, validation_data=(X_test, y_test))
 
     # Evaluate the model
-    _, accuracy = model.evaluate(X_test, y_test)
-    print("Accuracy: {:.2f}%".format(accuracy * 100))
-    model.save('/Users/adhishrajan/Desktop/hacklytics/')
+    # _, accuracy = model.evaluate(X_test, y_test)
+    # print("Accuracy: {:.2f}%".format(accuracy * 100))
+    model.save('/models')
 
 
     coordinate = np.array([[33.8085, -84.8422]])
