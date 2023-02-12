@@ -1,34 +1,42 @@
 import React, { useState, Component } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { MarkerF } from '@react-google-maps/api'
+import { Typography } from '@mui/material';
 // import GoogleMap from 'google-map-react'
 import { Icon } from '@iconify/react'
 import locationIcon from '@iconify/icons-mdi/map-marker'
+import { Box } from '@mui/system';
 
-const Map = ({lat, long}) => {
+const Map = ({ lat, long }) => {
   const [longtitude, setLong] = useState(long);
   const [latitude, setLat] = useState(lat);
-  
-  
-  const containerStyle = {
-    width: '700px',
-    height: '700px'
+  const [currentPosition, setCurrentPosition] = useState({
+    lat: lat,
+    lng: long
+  });
+
+  const onMarkerDragEnd = (e) => {
+    const lat = e.latLng.lat();
+    setLat(lat);
+    const lng = e.latLng.lng();
+    setLong(lng);
+    setCurrentPosition({ lat, lng });
   };
-  
+
+
+  const containerStyle = {
+    width: '550px',
+    height: '550px'
+  };
+
   const center = {
-    lat: latitude,
-    lng: longtitude
+    lat: lat,
+    lng: long
   }
-  
-  const LocationPin = ({ text }) => (
-    <div className="pin">
-      <Icon icon={locationIcon} className="pin-icon" />
-      <p className="pin-text">{text}</p>
-    </div>
-  )
-  
+
   class MapDisplay extends Component {
     render() {
-      return (  
+      return (
         <div>
           <LoadScript
             googleMapsApiKey="AIzaSyAI5Vt9NZ2SSocR9fues0XtewoOCGjADbo"
@@ -37,17 +45,26 @@ const Map = ({lat, long}) => {
               mapContainerStyle={containerStyle}
               center={center}
               zoom={7}
+
             >
               {/* <LocationPin
             lat={latitute}
             lng={longtitude}
             text={address}
           /> */}
-              
+              <MarkerF
+                position={currentPosition}
+                onDragEnd={(e) => onMarkerDragEnd(e)}
+                draggable={true} /> :
+              null
             </GoogleMap>
           </LoadScript>
-  
-        </div>
+          <br></br>
+          <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Typography variant="h6" textAlign={center}> Latitude: {(Math.round(latitude * 10000) / 10000.0)} Longtitude: {(Math.round(longtitude * 10000)) / 10000.0} </Typography>
+
+          </Box>
+        </div >
       )
     }
   }
@@ -56,24 +73,4 @@ const Map = ({lat, long}) => {
   );
 };
 export default Map;
-
-// const Map = ({ zoomLevel }) => (
-//   <div className="map">
-//     <h2 className="map-h2">Come Visit Us At Our Campus</h2>
-
-//     <div className="google-map" style={{height: '100vh', width: '100%'}}>
-//       <GoogleMap
-//         bootstrapURLKeys={{ key: 'AIzaSyBrZo0Z2Km_zpYmrNUeBig2GLtHjKfxJDk' }}
-//         defaultCenter={center}
-//         defaultZoom={zoomLevel}
-//       >
-//         <LocationPin
-//           lat={center.lat}
-//           lng={center.lng}
-//           text={center.address}
-//         />
-//       </GoogleMap>
-//     </div>
-//   </div>
-// )
 

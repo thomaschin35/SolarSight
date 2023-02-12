@@ -1,61 +1,96 @@
 import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, Typography, TextField, Alert } from '@mui/material';
 import { Card } from '@mui/material';
 import Map from './Components/Map';
+import solarImage from './solarImage.jpg'
+import ReactVirtualizedTable from './Components/ReactVirtualizedTable';
 
 
 
 function HomePage() {
     // Prevent page reload, clear input, set URL and push history on submit
 
-    const [longtitude, setLong] = useState(82);
-    const [latitude, setLat] = useState(32);
-    const [tempLong, tempSetLong] = useState(-84);
-    const [tempLat, tempSetLat] = useState(33);
-    
+    const [longtitude, setlng] = useState(-83.345324);
+    const [latitude, setlt] = useState(32.9);
+    const [longCalc, setLong] = useState(longtitude);
+    const [latCalc, setLat] = useState(latitude);
+    const [score, setScore] = useState();
 
-    const handleLong = (e) => {
+    const [red, setRed] = useState(false);
+    const [orange, setOrange] = useState(false);
+    const [yellow, setYellow] = useState(false);
+
+
+    const handleLong = async (e) => {
         setLong(e.target.value);
     }
-    const handleLat = (e) => {
+    const handleLat = async (e) => {
         setLat(e.target.value);
+    }
+
+    const calculateScore = (e) => {
+        if (score < 0.25) {
+            setYellow(true);
+        } 
     }
     return (
         <div>
-            
-            <Typography variant="h1" align="center" padding={1}>
+            <Typography variant="h2" align="center" padding={2} >
                 Solar Sight
             </Typography>
-            <Typography variant="h6" align="center" padding={1}>
-                Find the most optimal location to place Solar Panels in The United States
-            </Typography>
-            <Card sx={{ padding: 5, display: 'flex', margin: 'auto', justifyContent: 'center', backgroundColor: '#C2D3CD' }}>
-                <Stack spacing={1} sx={{ display: 'flex', margin: 'auto', justifyContent: 'center', alignItems: 'center' }}>
-                    <Stack spacing={3} direction="row" >
-                        <Typography variant="h5" margin={1}>
-                            Enter in a Longtitude and Latitude:
+
+            <Stack direction="row">
+                <Card sx={{ padding: 5, display: 'flex', margin: 'auto', backgroundColor: '#C0D6DF', minHeight: '500px' }}>
+                    <Stack spacing={1} sx={{ display: 'flex', margin: 'auto', width: '40%' }}>
+                        
+                        <img src={solarImage} alt="SolarImage"  height={300} />
+                        <h3> Solar Sight's Goal:</h3>
+                        {/* <img src={solarIcon} alt = "Solar Icon" width={60}/> */}
+                        <Typography variant="body1" align="left" fontSize={'110%'}>
+                            Find the most optimal location to place Solar Panels in <b>Georgia</b> using data from National Solar Radiation Database.
+                            We have created an algorithm to score locations based off of humidity, wind speed, and temperature data.
                         </Typography>
-                        <TextField id="longField" label="Longtitude" variant="outlined" onChange={handleLong} />
-                        <TextField id="latField" label="Latitude" variant="outlined" onChange={handleLat}/>
-                        <Button
-                            variant="contained"
-                            onClick={() => {
-                                console.log(longtitude);
-                                console.log(latitude);
-                                // tempSetLong(longtitude);
-                                // tempSetLat(latitude);
-                            }}
-                        >
-                            Click me
-                        </Button>
+                        <h3> <br></br>To find the most optimal location: </h3>
+                        <Typography variant="body1" fontWeight={100}>
+                            1. Drag the marker around Georgia to find your location <br></br>
+                            2. Enter in a coordinate in the range of Latitude: [31, 35], Longtitude [-81, -85] <br></br>
+                            3. Press Calculate Score -- Score Ranges from 0 - 1, with 1 being most optimal
+                        </Typography>
+                        <br></br>
+                        <Typography variant="h5" align='center'>
+                            CALCULATED SCORE: <br></br>{longCalc + latCalc}
+                        </Typography>
+                        
+
+
                     </Stack>
-                    <Map lat={tempLat} long={tempLong}/>
+                    <Box sx={{ width: '50%' }}>
+                        <Stack spacing={2} sx={{ display: 'flex', margin: 'auto', alignItems: 'center' }}>
+                            <Stack spacing={3} direction="row" >
+                                <Typography variant="h6" margin={1} textAlign="center">
+                                    Enter in a Longtitude and Latitude:
+                                </Typography>
+                                <TextField id="longField" label="Longtitude" variant="outlined" onChange={handleLong} />
+                                <TextField id="latField" label="Latitude" variant="outlined" onChange={handleLat} />
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => {
+                                        // take this user input and feed it into the python method
+                                    }}
+                                >
+                                    Calculate Score
+                                </Button>
+                            </Stack>
+                            <Map lat={latitude} long={longtitude} />
 
-                </Stack>
+                        </Stack>
 
-            </Card>
+                    </Box>
+                </Card>
+
+            </Stack>
 
         </div>
 
