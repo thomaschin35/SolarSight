@@ -69,29 +69,31 @@ function HomePage() {
                     <Box sx={{ width: '50%' }}>
                         <Stack spacing={2} sx={{ display: 'flex', margin: 'auto', alignItems: 'center' }}>
                             <Stack spacing={3} direction="row" >
-                                <Typography variant="h6" margin={1} textAlign="center">
-                                    Enter in a Longtitude and Latitude:
-                                </Typography>
-                                <TextField id="longField" label="Longtitude" variant="outlined" onChange={handleLong} />
-                                <TextField id="latField" label="Latitude" variant="outlined" onChange={handleLat} />
-                                <Button
-                                    variant="outlined"
-                                    onClick={() => {
-                                        // take this user input and feed it into the python method
-                                    }}
-                                >
-                                    Calculate Score
-                                </Button>
+                                <Box paddingBottom={4} paddingTop={4}>
+                                    <Typography variant="h6" margin={1} textAlign="center">
+                                        Enter in a Longtitude and Latitude:
+                                    </Typography>
+                                    <Stack spacing={1} direction='row'>
+                                        <TextField id="longField" label="Longtitude" variant="filled" onChange={handleLong} size="small"/>
+                                        <TextField id="latField" label="Latitude" variant="filled" onChange={handleLat} size="small" />
+                                        <Box sx={{height: '50px', width: '100px', display: 'flex', justifyContent: 'center'}} >
+                                            <Button
+                                                variant="contained"
+                                                onClick={() => {
+                                                    // take this user input and feed it into the python method
+                                                }}
+                                            >
+                                                Calculate Score
+                                            </Button>
+                                        </Box>
+                                    </Stack>
+                                </Box>
                             </Stack>
                             <Map lat={latitude} long={longtitude} />
-
                         </Stack>
-
                     </Box>
                 </Card>
-
             </Stack>
-
         </div>
 
     );

@@ -14,7 +14,6 @@ class USMap extends React.Component {
                 </Box>
                 <Box>
                     <DenseTable></DenseTable>
-
                 </Box>
             </>
         )
