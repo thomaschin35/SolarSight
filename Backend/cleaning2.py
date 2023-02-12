@@ -57,8 +57,14 @@ def main():
 def cost_function(ghi):
     if ghi[0][3] >= 100:
         return 1.0
+    elif ghi[0][3] < 0:
+        return 0.01
     else:
-        return ghi[0][3] / 100
+        if (ghi[0][3] / 166.7 * 100) + 20 > 100:
+            return (ghi[0][3] / 166.7 * 100)
+        else:
+            return (ghi[0][3] / 166.7 * 100) + 20
+
 
 
 if __name__ == "__main__":
